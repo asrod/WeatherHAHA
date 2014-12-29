@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="200dip"
+    android:background="#00aaaaaa" >
+
+   
+
+    <ImageButton
+        android:id="@+id/widget_imageButton1"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="25dp"
+        android:background="#60aaaaaa" />
+    
+     <TextView
+        android:id="@+id/widget_city"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@id/widget_imageButton1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="7dp"
+        android:layout_x="60dp"
+        android:layout_y="21dp"
+        android:gravity="left"
+        android:text="hello"
+        android:textColor="#eeeeee"
+        android:textSize="32px" />
+
+    <TextView
+        android:id="@+id/widget_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignBottom="@id/widget_imageButton1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="44dp"
+        android:gravity="left"
+        android:text="hello"
+        android:textColor="#eeeeee"
+        android:textSize="62px" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="200px"
+        android:layout_height="180px"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/widget_imageButton1"
+       />
+
+</RelativeLayout>
