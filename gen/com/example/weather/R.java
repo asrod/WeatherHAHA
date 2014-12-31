@@ -667,34 +667,34 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f0c0000;
-        public static final int RelativeLayout1=0x7f0c0028;
-        public static final int action_settings=0x7f0c002e;
+        public static final int RelativeLayout1=0x7f0c002a;
+        public static final int action_settings=0x7f0c0030;
         public static final int blue=0x7f0c000a;
         public static final int btn_update=0x7f0c0018;
         public static final int btn_xiugai=0x7f0c0004;
         public static final int buttonFloatSmall=0x7f0c0022;
         public static final int button_accept=0x7f0c0011;
         public static final int button_cancel=0x7f0c0010;
-        public static final int buttonflat=0x7f0c0026;
+        public static final int buttonflat=0x7f0c0028;
         public static final int contentDialog=0x7f0c000c;
         public static final int contentSelector=0x7f0c0006;
         public static final int dialog_rootView=0x7f0c000b;
-        public static final int edit_select_city=0x7f0c0024;
+        public static final int edit_select_city=0x7f0c0026;
         public static final int edittext_city=0x7f0c0003;
         public static final int green=0x7f0c0009;
-        public static final int imageView1=0x7f0c002c;
+        public static final int imageView1=0x7f0c002e;
         public static final int layout_above=0x7f0c0012;
         public static final int message=0x7f0c000f;
         public static final int message_scrollView=0x7f0c000e;
-        public static final int number_indicator_spinner_content=0x7f0c0023;
+        public static final int number_indicator_spinner_content=0x7f0c0025;
         public static final int red=0x7f0c0008;
         public static final int relativeLayout2=0x7f0c0021;
         public static final int rootSelector=0x7f0c0005;
-        public static final int shape_bacground=0x7f0c002d;
-        public static final int snackbar=0x7f0c0025;
+        public static final int shape_bacground=0x7f0c002f;
+        public static final int snackbar=0x7f0c0027;
         public static final int tableRow1=0x7f0c0019;
         public static final int tableRow2=0x7f0c001d;
-        public static final int text=0x7f0c0027;
+        public static final int text=0x7f0c0029;
         public static final int title=0x7f0c000d;
         public static final int tv_city=0x7f0c0017;
         public static final int tv_currentcity=0x7f0c0001;
@@ -702,6 +702,8 @@ containing a value of this type.
         public static final int tv_date2=0x7f0c001a;
         public static final int tv_date3=0x7f0c001e;
         public static final int tv_index=0x7f0c0016;
+        public static final int tv_pm=0x7f0c0024;
+        public static final int tv_staticpm=0x7f0c0023;
         public static final int tv_temp1=0x7f0c0013;
         public static final int tv_temp2=0x7f0c001c;
         public static final int tv_temp3=0x7f0c0020;
@@ -710,9 +712,9 @@ containing a value of this type.
         public static final int tv_weather3=0x7f0c001f;
         public static final int tv_wind1_and_fl1=0x7f0c0015;
         public static final int viewColor=0x7f0c0007;
-        public static final int widget_city=0x7f0c002a;
-        public static final int widget_imageButton1=0x7f0c0029;
-        public static final int widget_temperature=0x7f0c002b;
+        public static final int widget_city=0x7f0c002c;
+        public static final int widget_imageButton1=0x7f0c002b;
+        public static final int widget_temperature=0x7f0c002d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

@@ -97,6 +97,23 @@
             android:paddingTop="15sp"
             android:src="@drawable/update1" />
 
+        <TextView
+            android:id="@+id/tv_staticpm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_index"
+            android:layout_alignTop="@+id/tv_wind1_and_fl1"
+            android:text="PM2.5" />
+
+        <TextView
+            android:id="@+id/tv_pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_index"
+            android:layout_alignBottom="@+id/tv_index"
+            android:layout_alignLeft="@+id/tv_index"
+            android:text="TextView" />
+
     </RelativeLayout>
     <View
             android:layout_width="fill_parent"

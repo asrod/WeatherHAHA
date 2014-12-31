@@ -338,6 +338,7 @@ public class JsonParser {
 	private String fl2;//
 	private String fl3;//
 	private String index_d;// 今日穿衣指数
+	private String pm25;//pm2.5指数
 
 	private String jsonstring;
 
@@ -348,27 +349,31 @@ public class JsonParser {
 
 	private void parse() {
 		JSONObject dataJson = null;
-		JSONObject response = null;
+		JSONObject response_forecast = null; //读取forest的response
+		JSONObject response_aqi=null;//读取aqi的response
 
 		try {
 			dataJson = new JSONObject(jsonstring);
-			response = dataJson.getJSONObject("forecast");
+			response_forecast = dataJson.getJSONObject("forecast");
 
-			this.city = response.getString("city");
-			this.cityid=response.getString("cityid");
-			this.temp1 = response.getString("temp1");
-			this.temp2 = response.getString("temp2");
-			this.temp3 = response.getString("temp3");
-			this.weather1 = response.getString("weather1");
-			this.weather2 = response.getString("weather1");
-			this.weather3 = response.getString("weather1");
-			this.wind1 = response.getString("wind1");
-			this.wind2 = response.getString("wind2");
-			this.wind3 = response.getString("wind3");
-			this.fl1 = response.getString("fl1");
-			this.fl2 = response.getString("fl2");
-			this.fl3 = response.getString("fl3");
-			this.index_d = response.getString("index_d");
+			this.city = response_forecast.getString("city");
+			this.cityid=response_forecast.getString("cityid");
+			this.temp1 = response_forecast.getString("temp1");
+			this.temp2 = response_forecast.getString("temp2");
+			this.temp3 = response_forecast.getString("temp3");
+			this.weather1 = response_forecast.getString("weather1");
+			this.weather2 = response_forecast.getString("weather1");
+			this.weather3 = response_forecast.getString("weather1");
+			this.wind1 = response_forecast.getString("wind1");
+			this.wind2 = response_forecast.getString("wind2");
+			this.wind3 = response_forecast.getString("wind3");
+			this.fl1 = response_forecast.getString("fl1");
+			this.fl2 = response_forecast.getString("fl2");
+			this.fl3 = response_forecast.getString("fl3");
+			this.index_d = response_forecast.getString("index_d");
+			
+			response_aqi = dataJson.getJSONObject("aqi");
+		    this.pm25=response_aqi.getString("pm25");
 
 
 		} catch (JSONException e) {
@@ -436,6 +441,10 @@ public class JsonParser {
 	
 	public String getDressIndex(){
 		return this.index_d;
+	}
+	
+	public String getPm(){
+		return this.pm25;
 	}
 
 }

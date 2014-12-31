@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
 	TextView tv_temp3 = null;
 	TextView tv_weather2 = null;
 	TextView tv_weather3 = null;
+	TextView tv_pm=null;
 
 	Handler handler = null;
 
@@ -85,6 +86,7 @@ public class MainActivity extends Activity {
 		tv_temp3 = (TextView) findViewById(R.id.tv_temp3);
 		tv_wind1_and_fl1 = (TextView) findViewById(R.id.tv_wind1_and_fl1);
 		tv_index_d = (TextView) findViewById(R.id.tv_index);
+		tv_pm=(TextView) findViewById(R.id.tv_pm);
 		// edt_city = (AutoCompleteTextView) findViewById(R.id.edit_city);
 		btn_update = (ImageButton) findViewById(R.id.btn_update);
 
@@ -110,6 +112,7 @@ public class MainActivity extends Activity {
 		tv_temp3.setText(data.getTemp3());
 		tv_wind1_and_fl1.setText(data.getWind1());
 		tv_index_d.setText(data.getDressIndex());
+		tv_pm.setText(data.getPm25());
 
 	}
 

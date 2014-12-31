@@ -23,6 +23,7 @@ public class WeatherData {
 	private String fl2;//
 	private String fl3;//
 	private String index_d;// 今日穿衣指数
+	private String pm25;//pm2.5指数
 	//private String index48_d;// 48小时穿衣指数
 
 	public WeatherData(Context context) {
@@ -49,6 +50,7 @@ public class WeatherData {
 		this.fl1=sp.getString("wl1", null);
 		this.fl2=sp.getString("wl3", null);
 		this.fl3=sp.getString("wl2", null);
+		this.pm25=sp.getString("pm25", null);
 	}
 
 	
@@ -71,6 +73,7 @@ public class WeatherData {
 		 editor.putString("wl2", parser.getWindLevel2());
 		 editor.putString("wl3", parser.getWindLevel3());
 		 editor.putString("index_d", parser.getDressIndex());
+		 editor.putString("pm25", parser.getPm());
 
 
 		 editor.commit();
@@ -135,6 +138,9 @@ public class WeatherData {
 	
 	public String getDressIndex(){
 		return this.index_d;
+	}
+	public String getPm25(){
+		return this.pm25;
 	}
 //	public String getDressIndex48(){
 //		return this.index48_d;
