@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+     <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#01579b" >
+
+         <TextView
+             android:id="@+id/tv_city"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentLeft="true"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="10dp"
+             android:background="@null"
+             android:text="city"
+             android:textColor="#FFFFFF"
+             android:textSize="15sp" />
+
+         <com.gc.materialdesign.views.ButtonFloatSmall
+             android:id="@+id/buttonFloatSmall"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             materialdesign:iconDrawable="@drawable/ic_action_new" 
+             android:background="#1E88E5" >
+         </com.gc.materialdesign.views.ButtonFloatSmall>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_above"
+        android:layout_width="fill_parent"
+        android:layout_height="324dp"
+        android:layout_weight="0.51"
+         >
+
+        <TextView
+            android:id="@+id/tv_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_wind1_and_fl1"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="31dp"
+            android:layout_marginLeft="10dp"
+             android:textSize="15sp"
+             android:visibility="invisible"
+            android:text="index_d" />
+
+        <TextView
+            android:id="@+id/tv_wind1_and_fl1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_index"
+            android:layout_marginLeft="10dp"
+              android:visibility="invisible"
+             android:textSize="20sp"
+            android:text="wind1 and fl1" />
+
+        <TextView
+            android:id="@+id/tv_temp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:text="temp1"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_weather1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_temp1"
+            android:layout_centerHorizontal="true"
+            android:text="weather1"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/btn_update"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_alignBottom="@+id/tv_temp1"
+            android:layout_toRightOf="@+id/tv_temp1"
+            android:background="@null"
+            android:paddingBottom="10sp"
+            android:paddingTop="15sp"
+            android:src="@drawable/update1" />
+
+    </RelativeLayout>
+    <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#1E88E5" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.3" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+       
+            android:gravity="center"
+            android:textSize="18sp" >
+
+            <TextView
+                android:id="@+id/tv_date2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:layout_weight="1"
+                android:textSize="18sp" 
+                android:text="明天" />
+
+            <TextView
+                android:id="@+id/tv_weather2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="18sp" 
+                android:text="weather2" />
+
+            <TextView
+                android:id="@+id/tv_temp2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30sp"
+                android:layout_weight="0.5"
+                android:gravity="right"
+                android:textSize="18sp" 
+                android:text="temp2" />
+        </TableRow>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#1E88E5" />
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+       
+            android:gravity="center"
+            android:textSize="18sp" >
+
+            <TextView
+                android:id="@+id/tv_date3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30sp"
+                android:layout_weight="1"
+                android:textSize="18sp" 
+                android:text="后天" />
+
+            <TextView
+                android:id="@+id/tv_weather3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="18sp" 
+                android:text="weather2" />
+
+            <TextView
+                android:id="@+id/tv_temp3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30sp"
+                android:layout_weight="0.5"
+                android:gravity="right"
+                android:textSize="18sp" 
+                android:text="temp3" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>
