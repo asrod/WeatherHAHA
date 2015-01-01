@@ -35,8 +35,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 
 import com.example.weather.location.LocationJSONParser;
@@ -48,7 +50,7 @@ public class MainActivity extends Activity {
 
 	HttpDownloadHelpers helper = null;
 	MyReceiver receiver;
-
+	
 	TextView tv_city = null;
 	TextView tv_temp1 = null;
 	TextView tv_weather1 = null;
@@ -59,7 +61,8 @@ public class MainActivity extends Activity {
 	TextView tv_weather2 = null;
 	TextView tv_weather3 = null;
 	TextView tv_pm=null;
-	ButtonFloatSmall btn_locate=null;
+	ImageButton btn_locate=null;
+	ImageView imv_weather=null;
 	
 	private ProgressDialog dialog;
 	private double latitude;//纬度
@@ -81,6 +84,7 @@ public class MainActivity extends Activity {
 
 		// 初始化
 		init();
+		
 		setData();
 
 		// 接收mainService的广播
@@ -108,11 +112,16 @@ public class MainActivity extends Activity {
 		tv_pm=(TextView) findViewById(R.id.tv_pm);
 		// edt_city = (AutoCompleteTextView) findViewById(R.id.edit_city);
 		btn_update = (ImageButton) findViewById(R.id.btn_update);
-		btn_locate=(ButtonFloatSmall) findViewById(R.id.buttonFloatSmall);
+		btn_locate=(ImageButton) findViewById(R.id.buttonFloatSmall);
+		imv_weather=(ImageView) findViewById(R.id.imageView_weather);
 		handler = new MyHandler();
 		tv_city.setOnClickListener(new ClickCityListener());
 		btn_update.setOnClickListener(new UpdateButtonListener());
 		btn_locate.setOnClickListener(new LocationButtonListener());
+		
+		//imv_weather.setImageResource(R.drawable.qing);
+		
+		
 		// edt_city.setThreshold(1);
 		// edt_city.setAdapter(new CityAdapter(MainActivity.this, null, 0));
 	}
@@ -132,6 +141,29 @@ public class MainActivity extends Activity {
 		tv_wind1_and_fl1.setText(data.getWind1());
 		tv_index_d.setText(data.getDressIndex());
 		tv_pm.setText(data.getPm25());
+		
+		
+		pictureChange();
+
+	}
+
+	public void pictureChange() {
+		String weather1=null;
+		WeatherData data = new WeatherData(getApplicationContext());
+		data.getData();
+		if(data.getWeather1()!=null){
+			weather1=data.getWeather1();
+			System.out.println(weather1);
+			if(weather1.equals("阴"))
+				imv_weather.setImageResource(R.drawable.yin);
+			if(weather1.equals("晴"))
+				imv_weather.setImageResource(R.drawable.qing);
+			if(weather1.equals("多云")&&weather1.equals("多云转晴"))
+				imv_weather.setImageResource(R.drawable.duoyun);
+			if(weather1.equals("雪"))
+				imv_weather.setImageResource(R.drawable.xue);
+			
+		}
 
 	}
 
@@ -186,6 +218,8 @@ public class MainActivity extends Activity {
 			// 图标变换
 			Message msg = handler.obtainMessage();
 			msg.arg1 = 1;
+		
+			
 			handler.sendMessageDelayed(msg, 200);
 			msg = handler.obtainMessage();
 			msg.arg1 = 2;
@@ -213,6 +247,7 @@ public class MainActivity extends Activity {
 						MainService.class);
 				intent.putExtra("cityid", cityid);
 				startService(intent);
+	//			pictureChange();
 			}
 
 			if (msg.arg1 == 2)
@@ -221,10 +256,19 @@ public class MainActivity extends Activity {
 			if (msg.arg1 == 3) {
 				String city = msg.getData().getString("city");
 				String cityid =squeryCityid(city );
+				
 				Intent intent = new Intent(getApplicationContext(),
 						MainService.class);
 				intent.putExtra("cityid", cityid);
 				startService(intent);
+				
+				
+			}
+			
+			if(msg.arg1==4){
+				System.out.println("city="+city);
+				tv_pm.setText(city);
+				setSelectedCity(city.substring(0, city.length()-1));
 				
 			}
 
@@ -277,18 +321,10 @@ public class MainActivity extends Activity {
 				.findViewById(R.id.edit_select_city);
 		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
+				
+				String citySelected=edit_select_city.getText().toString();
 
-				Bundle data = new Bundle();
-				data.putString("city", edit_select_city.getText().toString());
-				Message m = handler.obtainMessage();
-				m.setData(data);
-				m.arg1 = 3;
-				handler.sendMessage(m);
-				
-				
-				Toast.makeText(getApplicationContext(),
-						"更改城市为 " + edit_select_city.getText().toString(),
-						Toast.LENGTH_SHORT).show();
+				setSelectedCity(citySelected);
 			}
 		});
 		builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -398,22 +434,15 @@ public class MainActivity extends Activity {
 			
 			thread_location=new myThread();
 			thread_location.start();
-			try {
-				thread_location.sleep(3000);
-//				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+ss);
+//			try {
+//				thread_location.sleep(3000);
+////				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+ss);
+//
 
-				System.out.println("city="+city);
-				tv_pm.setText(city);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
-			
-			
-			
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 			MainActivity.this.unregisterReceiver(this);// 不需要时注销
 		}
@@ -434,7 +463,23 @@ public class MainActivity extends Activity {
 	super.onDestroy();
 }
 	
-	
+	//变换当前的城市
+	public void setSelectedCity(String citySelected) { 
+		Bundle data = new Bundle();
+		data.putString("city", citySelected);
+		
+		Message m = handler.obtainMessage();
+		m.setData(data);
+		m.arg1 = 3;
+		handler.sendMessage(m);
+		
+		
+		Toast.makeText(getApplicationContext(),
+				"更改城市为 " + citySelected,
+				Toast.LENGTH_SHORT).show();
+		
+	}
+
 	class myThread extends Thread {
 		HttpDownloadHelpers down;
 		
@@ -458,7 +503,10 @@ public class MainActivity extends Activity {
 	//		System.out.println(ss);
 			LocationJSONParser locationJSONParse=new LocationJSONParser(ss);
 			city=locationJSONParse.getCity();
-
+			Message msg = handler.obtainMessage();
+			
+			msg.arg1=4;
+			handler.sendMessage(msg);
 			// tv3.setText(ss);
 		}
 
@@ -467,5 +515,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	
+	
 	
 }

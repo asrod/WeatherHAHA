@@ -25,15 +25,16 @@
              android:textColor="#FFFFFF"
              android:textSize="15sp" />
 
-         <com.gc.materialdesign.views.ButtonFloatSmall
+         <ImageButton
              android:id="@+id/buttonFloatSmall"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_width="40dp"
+             android:layout_height="40dp"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
-             materialdesign:iconDrawable="@drawable/ic_action_new" 
-             android:background="#1E88E5" >
-         </com.gc.materialdesign.views.ButtonFloatSmall>
+             android:layout_marginRight="16dp"
+             android:background="#00000000"
+             android:scaleType="fitXY"
+             android:src="@drawable/location" />
 
     </RelativeLayout>
 
@@ -67,35 +68,14 @@
             android:text="wind1 and fl1" />
 
         <TextView
-            android:id="@+id/tv_temp1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:text="temp1"
-            android:textSize="50sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/tv_weather1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_temp1"
             android:layout_centerHorizontal="true"
             android:text="weather1"
+            android:gravity="center_horizontal"
             android:textSize="18sp" />
-
-        <ImageButton
-            android:id="@+id/btn_update"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:layout_alignBottom="@+id/tv_temp1"
-            android:layout_toRightOf="@+id/tv_temp1"
-            android:background="@null"
-            android:paddingBottom="10sp"
-            android:paddingTop="15sp"
-            android:src="@drawable/update1" />
 
         <TextView
             android:id="@+id/tv_staticpm"
@@ -103,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tv_index"
             android:layout_alignTop="@+id/tv_wind1_and_fl1"
+            android:visibility="invisible"
             android:text="PM2.5" />
 
         <TextView
@@ -112,7 +93,40 @@
             android:layout_alignBaseline="@+id/tv_index"
             android:layout_alignBottom="@+id/tv_index"
             android:layout_alignLeft="@+id/tv_index"
+            android:visibility="invisible"
             android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_temp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:text="temp1"
+            android:gravity="center_horizontal"
+            android:textSize="65sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView_weather"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_below="@+id/tv_weather1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:src="@drawable/duoyun" />
+
+        <ImageButton
+            android:id="@+id/btn_update"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_above="@+id/tv_weather1"
+            android:layout_toRightOf="@+id/tv_temp1"
+            android:background="@null"
+            android:paddingBottom="10sp"
+            android:paddingTop="15sp"
+            android:src="@drawable/update1" />
 
     </RelativeLayout>
     <View
