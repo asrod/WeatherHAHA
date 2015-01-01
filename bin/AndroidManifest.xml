@@ -13,6 +13,8 @@
     <uses-permission 
         android:name="android.permission.ACCESS_NETWORK_STATE"
         />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -42,6 +44,8 @@
         
         <service 
             android:name="com.example.weather.MainService"></service>
+        <service 
+            android:name="com.example.weather.location.LocationSvc"></service>
     </application>
     
     

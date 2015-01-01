@@ -1,12 +1,16 @@
 package com.example.weather;
 
 import com.example.weather.R;
+import com.example.weather.location.Common;
+import com.gc.materialdesign.views.ButtonFloatSmall;
+import com.example.weather.location.*;
 import com.utils.DBManager;
 import com.utils.HttpDownloadHelpers;
 import com.utils.WeatherData;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -34,6 +38,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.example.weather.location.LocationJSONParser;
+import com.example.weather.location.Common;
+import com.example.weather.location.LocationSvc;
+
+
 public class MainActivity extends Activity {
 
 	HttpDownloadHelpers helper = null;
@@ -49,8 +59,17 @@ public class MainActivity extends Activity {
 	TextView tv_weather2 = null;
 	TextView tv_weather3 = null;
 	TextView tv_pm=null;
-
+	ButtonFloatSmall btn_locate=null;
+	
+	private ProgressDialog dialog;
+	private double latitude;//纬度
+	private double longitude;//经度
+    private myThread thread_location;//定位线程
 	Handler handler = null;
+	String latitude_string=null;//经度的字符串类型
+	String longitude_string=null;//纬度的字符串类型
+	String city=null;
+	String ss;//JSONdata
 
 	// AutoCompleteTextView edt_city = null;
 	ImageButton btn_update = null;
@@ -89,11 +108,11 @@ public class MainActivity extends Activity {
 		tv_pm=(TextView) findViewById(R.id.tv_pm);
 		// edt_city = (AutoCompleteTextView) findViewById(R.id.edit_city);
 		btn_update = (ImageButton) findViewById(R.id.btn_update);
-
+		btn_locate=(ButtonFloatSmall) findViewById(R.id.buttonFloatSmall);
 		handler = new MyHandler();
 		tv_city.setOnClickListener(new ClickCityListener());
 		btn_update.setOnClickListener(new UpdateButtonListener());
-
+		btn_locate.setOnClickListener(new LocationButtonListener());
 		// edt_city.setThreshold(1);
 		// edt_city.setAdapter(new CityAdapter(MainActivity.this, null, 0));
 	}
@@ -125,6 +144,35 @@ public class MainActivity extends Activity {
 			showSelectCityDialog();
 
 		}
+	}
+	
+	class LocationButtonListener implements OnClickListener{
+		
+		
+
+		@Override
+		public void onClick(View v) {
+			
+			
+			// 注册广播
+			IntentFilter filter = new IntentFilter();
+			filter.addAction(Common.LOCATION_ACTION);
+			MainActivity.this.registerReceiver(new LocationBroadcastReceiver(), filter);
+			
+			// 启动服务
+			Intent intentLocationService = new Intent();
+			intentLocationService.setClass(MainActivity.this, LocationSvc.class);
+			startService(intentLocationService);
+			
+			// 等待提示
+			dialog = new ProgressDialog(MainActivity.this);
+			dialog.setMessage("正在定位...");
+			dialog.setCancelable(true);
+			dialog.show();
+			
+			
+		}
+		
 	}
 
 	class UpdateButtonListener implements OnClickListener {
@@ -324,7 +372,52 @@ public class MainActivity extends Activity {
 		} 
 		return false; 
 	}	
-	
+
+	private class LocationBroadcastReceiver extends BroadcastReceiver {
+		
+
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (!intent.getAction().equals(Common.LOCATION_ACTION)) return;
+			String locationInfo = intent.getStringExtra(Common.LOCATION);
+//			text.setText(locationInfo);
+			
+			System.out.println("locationinfo="+locationInfo);
+			dialog.dismiss();
+			latitude_string=intent.getStringExtra("latitude"); //从intent读取经纬度数据
+			longitude_string=intent.getStringExtra("longitude");
+//			System.out.println("latitude="+lat);
+//			System.out.println("longitude="+log);
+			
+			latitude=Double.valueOf(latitude_string).doubleValue(); //将字符串类型转化为double类型
+			longitude=Double.valueOf(longitude_string).doubleValue();
+			
+			System.out.println("latitude="+latitude);
+			System.out.println("longitude="+longitude);
+			
+			thread_location=new myThread();
+			thread_location.start();
+			try {
+				thread_location.sleep(3000);
+//				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+ss);
+
+				System.out.println("city="+city);
+				tv_pm.setText(city);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+			
+			
+			MainActivity.this.unregisterReceiver(this);// 不需要时注销
+		}
+	}
 	
 	
 	public void sendBroadcast2Widget(){
@@ -333,12 +426,46 @@ public class MainActivity extends Activity {
 	     sendBroadcast(intent);
 	}
 	
-@Override
-protected void onDestroy() {
+	@Override
+	protected void onDestroy() {
 	// TODO Auto-generated method stub
 	unregisterReceiver(receiver);
 	
 	super.onDestroy();
 }
+	
+	
+	class myThread extends Thread {
+		HttpDownloadHelpers down;
+		
+//
+//		public myThread(double longitude, double latitude) {
+//				latitude = latitude;
+//				longitude = longitude;
+//
+//		}
+
+		public void run() {
+
+			down = new HttpDownloadHelpers();
+//			
+//			System.out.println("thread_latitude="+latitude);
+//			System.out.println("thread_longitude="+longitude);
+			String urlStr = "http://api.map.baidu.com/geocoder/v2/?ak=EEd58a36c014b62013f94be93637c14d&callback=renderReverse&location="
+					+ latitude_string + "," + longitude_string + "&output=json&pois=1";
+			ss = down.download(urlStr);
+			// Log.e("aaa", ss);
+	//		System.out.println(ss);
+			LocationJSONParser locationJSONParse=new LocationJSONParser(ss);
+			city=locationJSONParse.getCity();
+
+			// tv3.setText(ss);
+		}
+
+		public String getString() {
+			return ss;
+		}
+	}
+
 	
 }
