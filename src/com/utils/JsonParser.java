@@ -351,6 +351,7 @@ public class JsonParser {
 		JSONObject dataJson = null;
 		JSONObject response_forecast = null; //读取forest的response
 		JSONObject response_aqi=null;//读取aqi的response
+		JSONObject response_accu_cc=null;//读取accu_cc的response
 
 		try {
 			dataJson = new JSONObject(jsonstring);
@@ -358,7 +359,7 @@ public class JsonParser {
 
 			this.city = response_forecast.getString("city");
 			this.cityid=response_forecast.getString("cityid");
-			this.temp1 = response_forecast.getString("temp1");
+			//this.temp1 = response_forecast.getString("temp1");
 			this.temp2 = response_forecast.getString("temp2");
 			this.temp3 = response_forecast.getString("temp3");
 			this.weather1 = response_forecast.getString("weather1");
@@ -372,8 +373,12 @@ public class JsonParser {
 			this.fl3 = response_forecast.getString("fl3");
 			this.index_d = response_forecast.getString("index_d");
 			
-			response_aqi = dataJson.getJSONObject("aqi");
-		    this.pm25=response_aqi.getString("pm25");
+//			response_aqi = dataJson.getJSONObject("today");
+//		    this.pm25=response_aqi.getString("tempMax");
+		    
+		    response_accu_cc=dataJson.getJSONObject("accu_cc");
+		    this.temp1=response_accu_cc.getString("RealFeelTemperature");
+		    
 
 
 		} catch (JSONException e) {

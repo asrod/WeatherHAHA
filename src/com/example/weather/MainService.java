@@ -100,7 +100,7 @@ public class MainService extends Service {
 			//	String url = "http://m.weather.com.cn/atad/" + citycode	+ ".html";
 				HttpDownloadHelpers httpDownloadHelper = new HttpDownloadHelpers();
 				String str = httpDownloadHelper.download(url);
-				 System.out.println(str);
+				System.out.println(str);
 
 				// 更新数据
 				WeatherData data = new WeatherData(MainService.this);

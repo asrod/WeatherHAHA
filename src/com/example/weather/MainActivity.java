@@ -107,7 +107,7 @@ public class MainActivity extends Activity {
 		tv_weather1.setText(data.getWeather1());
 		tv_weather2.setText(data.getWeather2());
 		tv_weather3.setText(data.getWeather3());
-		tv_temp1.setText(data.getTemp1());
+		tv_temp1.setText(data.getTemp1()+"¡ã");
 		tv_temp2.setText(data.getTemp2());
 		tv_temp3.setText(data.getTemp3());
 		tv_wind1_and_fl1.setText(data.getWind1());
@@ -131,7 +131,6 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
 
 			//¼ì²éÍøÂçÁ¬½Ó
 			if(isNetworkConnected(getApplicationContext())){
